@@ -40,7 +40,7 @@ public class ProductoControlador {
        vprod.dispose();
       }
      public Producto traer(int id){
-    
-        return null;
+         Producto xprod = (Producto)regProducto.traer(id);
+         return xprod;
      } 
 }

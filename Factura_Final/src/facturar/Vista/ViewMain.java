@@ -63,24 +63,28 @@ public class ViewMain extends javax.swing.JFrame {
 
         TreeMenu.setBackground(new java.awt.Color(240, 240, 240));
         TreeMenu.setForeground(java.awt.SystemColor.menu);
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Inicio");
-        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Facturas");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Nueva Factura");
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Inicio");
+        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Facturas");
+        javax.swing.tree.DefaultMutableTreeNode treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Nueva Factura");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Listar Facturas");
+        treeNode3.add(treeNode4);
         treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Listar Facturas");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Productos");
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Nuevo Producto");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Listar Producto");
+        treeNode3.add(treeNode4);
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Clientes");
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Nuevo Cliente");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Listar Clientes");
+        treeNode3.add(treeNode4);
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Productos");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Nuevo Producto");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Listar Producto");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Clientes");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Nuevo Cliente");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Listar Clientes");
-        treeNode2.add(treeNode3);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Salir");
         treeNode1.add(treeNode2);
         TreeMenu.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         TreeMenu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -142,6 +146,16 @@ public class ViewMain extends javax.swing.JFrame {
                 vprod.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 vprod.setVisible(true);
                 break;
+            case "Listar Producto":    
+                ViewLineaProducto vlineaProd = new ViewLineaProducto();
+                vlineaProd.setLocationRelativeTo(null);
+                vlineaProd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                vlineaProd.setVisible(true);
+                break;
+            case "Salir":
+                   int resp=JOptionPane.showConfirmDialog(null, "¿Desea salir del sistema?", "Escoger opcion", JOptionPane.YES_NO_OPTION);
+                   if (resp==0)System.exit(0);
+                   
         }
         opcion="";
     }//GEN-LAST:event_cliente

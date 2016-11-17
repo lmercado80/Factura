@@ -5,6 +5,8 @@
  */
 package facturar.Vista;
 
+import facturar.Controlador.ClienteControlador;
+import facturar.Modelo.Cliente;
 import javax.swing.JFrame;
 
 /**
@@ -30,7 +32,6 @@ public class ViewFactura extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDatePickerUtil1 = new org.jdatepicker.util.JDatePickerUtil();
         jComboBox1 = new javax.swing.JComboBox<>();
         PanelSup = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -38,10 +39,10 @@ public class ViewFactura extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtFecha = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         cboClientes = new javax.swing.JComboBox<>();
         btnContinuar = new javax.swing.JButton();
         btnAddProd = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         PanelCentral = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaDet = new javax.swing.JTable();
@@ -63,8 +64,6 @@ public class ViewFactura extends javax.swing.JFrame {
         jLabel2.setText("Cliente");
 
         jLabel3.setText("Fecha");
-
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
         cboClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,13 +97,13 @@ public class ViewFactura extends javax.swing.JFrame {
                         .addComponent(txtFecha)
                         .addGap(82, 82, 82)
                         .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PanelSupLayout.createSequentialGroup()
                         .addComponent(cboClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(btnContinuar)))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelSupLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAddProd)
@@ -114,12 +113,13 @@ public class ViewFactura extends javax.swing.JFrame {
             PanelSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelSupLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PanelSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtNumFact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFecha)
-                    .addComponent(jLabel3)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(PanelSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(txtNumFact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFecha)
+                        .addComponent(jLabel3))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(PanelSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -201,7 +201,7 @@ public class ViewFactura extends javax.swing.JFrame {
             .addGroup(PanelCentralLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCentralLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(PanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,7 +283,16 @@ public class ViewFactura extends javax.swing.JFrame {
     }//GEN-LAST:event_TablaDetFocusLost
 
     private void cboClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboClientesActionPerformed
-        // TODO add your handling code here:
+        ClienteControlador cliControl = new ClienteControlador();        
+      Cliente cli =cliControl.traer((this.getName())); 
+      if (prod==null){
+        JOptionPane.showMessageDialog(this,"Producto Noexiste. Verifique");
+        return;
+      }
+      this.txtDescripcion.setText(prod.getDescripcion());
+      this.txtPrecio.setText(Double.toString(prod.getPrecio()));
+      
+        
     }//GEN-LAST:event_cboClientesActionPerformed
 
     private void btnAddProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdActionPerformed
@@ -339,8 +348,7 @@ public class ViewFactura extends javax.swing.JFrame {
     private javax.swing.JButton btnContinuar;
     private javax.swing.JComboBox<String> cboClientes;
     private javax.swing.JComboBox<String> jComboBox1;
-    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

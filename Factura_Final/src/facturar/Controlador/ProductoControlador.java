@@ -24,9 +24,8 @@ public class ProductoControlador {
         regProducto = new Repositorio<>();
         regProducto.cargar("Producto");
     }
-      public void  crear(ViewProducto  vprod){
-       
-         
+    public void  crear(ViewProducto  vprod){
+                
        Producto prod = new Producto(); 
        prod.setId(Integer.parseInt(vprod.txtId.getText()));
        prod.setId(Integer.parseInt(vprod.txtId.getText()));
@@ -39,8 +38,7 @@ public class ProductoControlador {
        JOptionPane.showMessageDialog(null,"Registro Ha sido Guardado");
        vprod.dispose();
       }
-     public Producto traer(int id){
-         Producto xprod = (Producto)regProducto.traer(id);
-         return xprod;
+    public Producto traer(int id){         
+        return (Producto)regProducto.traer(id);
      } 
 }

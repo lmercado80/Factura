@@ -25,9 +25,6 @@
   <SubComponents>
     <Container class="javax.swing.JPanel" name="Panel_sup">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="ff" red="ff" type="rgb"/>
-        </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
             <BevelBorder/>
@@ -95,8 +92,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="Panel_izq" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="653" max="32767" attributes="0"/>
+                  <Component id="Panel_izq" min="-2" pref="204" max="-2" attributes="0"/>
+                  <EmptySpace pref="667" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -117,8 +114,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="198" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="183" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -147,6 +144,7 @@
                     <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
                       <TreeModel code="Inicio&#xa; Facturas&#xa;  Nueva Factura&#xa;  Listar Facturas&#xa; Productos&#xa;  Nuevo Producto&#xa;  Listar Producto&#xa; Clientes&#xa;  Nuevo Cliente&#xa;  Listar Clientes&#xa;Salir&#xa;  "/>
                     </Property>
+                    <Property name="rootVisible" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cliente"/>

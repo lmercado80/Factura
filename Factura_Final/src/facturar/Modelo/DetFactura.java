@@ -3,7 +3,7 @@ package facturar.Modelo;
 
 public class DetFactura {
     private int id;
-    private static int idSiguiente=1;
+    private String codigo;
     private int idFactura;
     private int cant;
     private double precio;
@@ -50,6 +50,14 @@ public class DetFactura {
 
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
     
     

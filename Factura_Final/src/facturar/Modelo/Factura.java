@@ -3,14 +3,13 @@ import java.util.Date;
 public class Factura {
   
     private int id;
-    private static int idSiguiente=1;
     private String num;
+    private  int  idCliente;
     private String direccion;
     private Date fecha;
     
     public Factura() {
-       id=idSiguiente;
-       idSiguiente++; 
+      
     }
 
     public int getId() {
@@ -35,6 +34,22 @@ public class Factura {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
         
       

@@ -30,7 +30,6 @@ public class ViewMain extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Panel_sup.setBackground(new java.awt.Color(255, 255, 204));
         Panel_sup.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -87,6 +86,7 @@ public class ViewMain extends javax.swing.JFrame {
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Salir");
         treeNode1.add(treeNode2);
         TreeMenu.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        TreeMenu.setRootVisible(false);
         TreeMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cliente(evt);
@@ -100,8 +100,8 @@ public class ViewMain extends javax.swing.JFrame {
             Panel_izqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_izqLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
         Panel_izqLayout.setVerticalGroup(
             Panel_izqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,8 +114,8 @@ public class ViewMain extends javax.swing.JFrame {
             Panel_centralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_centralLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Panel_izq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(653, Short.MAX_VALUE))
+                .addComponent(Panel_izq, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(667, Short.MAX_VALUE))
         );
         Panel_centralLayout.setVerticalGroup(
             Panel_centralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,9 +131,22 @@ public class ViewMain extends javax.swing.JFrame {
 
     private void cliente(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cliente
         // TODO add your handling code here:
+     
         String opcion= TreeMenu.getLastSelectedPathComponent().toString();                
         
         switch (opcion){
+             case "Nueva Factura":
+                ViewFactura vfactura = new ViewFactura();
+                vfactura.setLocationRelativeTo(null);
+                vfactura.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                vfactura.setVisible(true);
+                break;
+             case "Listar Facturas":
+                ViewListaFactura vlfactura = new ViewListaFactura();
+                vlfactura.setLocationRelativeTo(null);
+                vlfactura.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                vlfactura.setVisible(true);
+                break;
             case "Nuevo Cliente":
                 ViewCliente vcli = new ViewCliente();
                 vcli.setLocationRelativeTo(null);
@@ -146,17 +159,12 @@ public class ViewMain extends javax.swing.JFrame {
                 vprod.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 vprod.setVisible(true);
                 break;
-            case "Listar Producto":    
-                ViewLineaProducto vlineaProd = new ViewLineaProducto();
-                vlineaProd.setLocationRelativeTo(null);
-                vlineaProd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                vlineaProd.setVisible(true);
-                break;
             case "Salir":
-                   int resp=JOptionPane.showConfirmDialog(null, "¿Desea salir del sistema?", "Escoger opcion", JOptionPane.YES_NO_OPTION);
-                   if (resp==0)System.exit(0);
-                   
-        }
+                int resp = JOptionPane.showConfirmDialog (null, "Esta seguro qdesea Salir?");
+                if(resp== JOptionPane.YES_OPTION){
+                    System.exit(-1);
+                }
+               }
         opcion="";
     }//GEN-LAST:event_cliente
 

@@ -1,6 +1,4 @@
-
 package facturar.Modelo;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -21,11 +19,13 @@ import java.util.logging.Logger;
 public  class Repositorio <T>  {
   
    private List<T> lista=new ArrayList<>();
-   
+      
    public Repositorio() {
       
+      
+      
     }
-   
+
     public  void  guardar(String nombre) {
       if (lista ==null ) return;
       Gson gson = new Gson();
@@ -39,7 +39,7 @@ public  class Repositorio <T>  {
         }
     } 
     
-     public void cargar (String nombre) {
+     public void cargar (String nombre)  {
         String ruta="datos/"+nombre+".json";
     
         File archivo =new File(ruta);
@@ -48,16 +48,12 @@ public  class Repositorio <T>  {
         Gson gson =new Gson();
          FileReader reader;
         try {
-            reader = new FileReader(ruta);
-            Type tipo=null;
-             if (nombre =="Cliente") 
-                tipo = new TypeToken<List<Cliente>>(){}.getType();  
-             if (nombre =="Producto") 
-                tipo = new TypeToken<List<Producto>>(){}.getType(); 
-             
-             lista = gson.fromJson(reader,tipo);             
-                         
-          int x=1;   
+            reader = new FileReader(ruta); 
+            Type tipo=Helper.getTipoRepo(nombre);// obtiene el tipo de repositorio generico 
+            if (tipo != null ){ 
+              lista = gson.fromJson(reader,tipo);             
+            }             
+          
         } catch (FileNotFoundException ex) {
            System.out.println(ex);
         }
@@ -97,6 +93,7 @@ public  class Repositorio <T>  {
     }
     
  public T traer(int id) {
+     if (lista == null)  return null;
      Iterator<T> it = getLista().iterator();
     while (it.hasNext()) {
         Object item = it.next();

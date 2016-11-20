@@ -32,6 +32,15 @@ public  class Helper {
            case "Factura":
                tipo=new TypeToken<List<Factura>>(){}.getType();
               break;
+           case "Parametro":
+               tipo=new TypeToken<List<Parametro>>(){}.getType();
+              break;
+            case "EstadoCliente":
+               tipo=new TypeToken<List<EstadoCliente>>(){}.getType();
+              break;
+              case "EstadoProducto":
+               tipo=new TypeToken<List<EstadoProducto>>(){}.getType();
+              break;
            case "DetFactura":
                tipo=new TypeToken<List<DetFactura>>(){}.getType();
               break;

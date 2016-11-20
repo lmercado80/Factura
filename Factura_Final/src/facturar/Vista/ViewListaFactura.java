@@ -34,14 +34,14 @@ public class ViewListaFactura extends javax.swing.JFrame {
         for (int i=0; i < listaFact.size();i++){
            lista[0]=(Integer)listaFact.get(i).getId();            
            lista[1]=(String)listaFact.get(i).getNum();
-           int xidcli=(Integer)listaFact.get(i).getIdCliente();
-           Cliente cli =regClientes.traer(xidcli);
+           String xidcli= listaFact.get(i).getIdCliente();
+          /*Cliente cli =regClientes.traer(xidcli);
            lista[2]=cli.getRazonSocial();
            String DATE_FORMAT = "dd/MMMM/yyyy";
            SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);           
            lista[3]=sdf.format(listaFact.get(i).getFecha());
            lista[4]=listaFact.get(i).getDireccion();
-           model.addRow(lista);
+           model.addRow(lista);*/
         }
         
     }

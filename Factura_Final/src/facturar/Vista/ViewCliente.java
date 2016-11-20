@@ -6,7 +6,14 @@
 package facturar.Vista;
 
 import facturar.Controlador.ClienteControlador;
+import facturar.Modelo.Cliente;
+import facturar.Modelo.EstadoCliente;
+import facturar.Modelo.Parametro;
+import facturar.Modelo.Repositorio;
 import facturar.Modelo.Validar;
+import java.util.HashMap;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,8 +25,52 @@ public class ViewCliente extends javax.swing.JFrame {
     /**
      * Creates new form ViewCliente
      */
+     public HashMap <String,String> mapestadocli;
+    int identificador = 0, identificadorCliente = 0, identificadorProducto = 0;
     public ViewCliente() {
         initComponents();
+         HashMap <String,String> map=new HashMap<String,String>();
+     
+       Parametro par = new Parametro();
+       Parametro parBorrar = new Parametro();
+       
+        Repositorio<Cliente> regClientes =new Repositorio();
+        Repositorio<Parametro> regParametros =new Repositorio();
+        Repositorio<EstadoCliente> regEstados =new Repositorio();
+        
+        regClientes.cargar("Cliente");
+        regParametros.cargar("Parametro");
+        regEstados.cargar("EstadoCliente");
+        
+        
+        List<Cliente> clientes = regClientes.getLista();
+        List<EstadoCliente> estados = regEstados.getLista();
+        List<Parametro> parametros = regParametros.getLista();
+      
+        for (int i=0;i < parametros.size();i++){
+            
+            identificador = parametros.get(i).getId_Cli()+1;
+            
+            par.setId_Cli(identificador);
+            par.setId_fac(parametros.get(i).getId_fac());
+            par.setId_prod(parametros.get(i).getId_prod());
+            //    System.out.println("test"+ identificador);
+
+        }
+        
+        for (int i=0;i < estados.size();i++){
+           
+           map.put(estados.get(i).getEstadocli(),estados.get(i).getEstadocli());
+            System.out.println(estados.get(i).getEstadocli());
+        }
+        
+        
+        txtId.setText(identificador+"");
+        txtId.setEnabled(false);
+        mapestadocli=map;
+       cboEstado.setModel(new DefaultComboBoxModel( map.values().toArray()));
+
+        
     }
 
     /**
@@ -124,8 +175,6 @@ public class ViewCliente extends javax.swing.JFrame {
         jLabel6.setText("Teléfono");
 
         jLabel7.setText("Estado");
-
-        cboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo", "Suspendido", " " }));
 
         btnAceptar.setText("Aceptar");
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -300,6 +349,26 @@ public class ViewCliente extends javax.swing.JFrame {
         
         ClienteControlador cliControl = new ClienteControlador();
         cliControl.crear(this);
+        Parametro par = new Parametro();
+        Repositorio<Parametro> regParametros =new Repositorio();        
+        regParametros.cargar("Parametro");
+        List<Parametro> parametros = regParametros.getLista();
+      
+        for (int i=0;i < parametros.size();i++){
+            
+            identificador = parametros.get(i).getId_Cli()+1;
+            par.setId_Cli(identificador);
+            par.setId_fac(parametros.get(i).getId_fac());
+            par.setId_prod(parametros.get(i).getId_prod());
+            //    System.out.println("test"+ identificador);
+
+        }
+        
+               
+        regParametros.adicionar(par);
+        
+        regParametros.guardar("Parametro");
+        this.dispose();      
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void txtNitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNitKeyTyped

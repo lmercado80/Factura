@@ -6,6 +6,15 @@
 package facturar.Vista;
 
 import facturar.Controlador.ProductoControlador;
+import facturar.Modelo.Cliente;
+import facturar.Modelo.EstadoCliente;
+import facturar.Modelo.EstadoProducto;
+import facturar.Modelo.Parametro;
+import facturar.Modelo.Producto;
+import facturar.Modelo.Repositorio;
+import java.util.HashMap;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -13,11 +22,53 @@ import facturar.Controlador.ProductoControlador;
  */
 public class ViewProducto extends javax.swing.JFrame {
 
+    public HashMap <String,String> mapestado;
     /**
      * Creates new form ViewProducto
      */
+     int identificador = 0, identificadorCliente = 0, identificadorProducto = 0;
     public ViewProducto() {
         initComponents();
+        HashMap <String,String> map=new HashMap<String,String>();
+        
+        
+       Parametro par = new Parametro();
+       
+       
+        Repositorio <Producto> regProductos =new Repositorio();
+        Repositorio<Parametro> regParametros =new Repositorio();
+        Repositorio<EstadoProducto> regEstados =new Repositorio();
+        
+        regProductos.cargar("Producto");
+        regParametros.cargar("Parametro");
+        regEstados.cargar("EstadoProducto");
+        
+        List<Producto> productos = regProductos.getLista();
+        List<Parametro> parametros = regParametros.getLista();
+        List<EstadoProducto> estadop = regEstados.getLista();
+        
+        for (int i=0;i < parametros.size();i++){
+            
+            identificador = parametros.get(i).getId_prod()+1;
+            
+            par.setId_prod(identificador);
+            par.setId_fac(parametros.get(i).getId_fac());
+            par.setId_Cli(parametros.get(i).getId_Cli());
+            //    System.out.println("test"+ identificador);
+
+        } 
+        
+        for (int i=0;i < estadop.size();i++){
+           
+           map.put(estadop.get(i).getEstado(),estadop.get(i).getEstado());
+            
+        }
+        
+        
+        txtId.setText(identificador+"");
+        txtId.setEnabled(false);
+        mapestado=map;
+       cboEstado.setModel(new DefaultComboBoxModel( map.values().toArray()));
     }
 
     /**
@@ -90,10 +141,20 @@ public class ViewProducto extends javax.swing.JFrame {
                 txtPrecioActionPerformed(evt);
             }
         });
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyTyped(evt);
+            }
+        });
 
         jLabel3.setText("Precio");
 
-        cboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo", " " }));
+        cboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cboEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboEstadoActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Estado");
 
@@ -211,12 +272,43 @@ public class ViewProducto extends javax.swing.JFrame {
         // TODO add your handling code here:
          ProductoControlador prodControl = new ProductoControlador();
         prodControl.crear(this);
+        
+         Parametro par = new Parametro();
+        Repositorio<Parametro> regParametros =new Repositorio();        
+        regParametros.cargar("Parametro");
+        List<Parametro> parametros = regParametros.getLista();
+      
+        for (int i=0;i < parametros.size();i++){
+            
+            identificador = parametros.get(i).getId_prod()+1;
+            par.setId_prod(identificador);
+            par.setId_fac(parametros.get(i).getId_fac());
+            par.setId_Cli(parametros.get(i).getId_Cli());
+            //    System.out.println("test"+ identificador);
+
+        }
+        
+               
+        regParametros.adicionar(par);
+        
+        regParametros.guardar("Parametro");
+        
+        this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
+        char c = evt.getKeyChar();
+        if (c<'0' || c >'9') evt.consume();
+    }//GEN-LAST:event_txtPrecioKeyTyped
+
+    private void cboEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboEstadoActionPerformed
 
     /**
      * @param args the command line arguments

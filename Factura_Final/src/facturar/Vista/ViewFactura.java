@@ -8,6 +8,7 @@ package facturar.Vista;
 import facturar.Controlador.DetFacturaControlador;
 import facturar.Controlador.FacturaControlador;
 import facturar.Modelo.Cliente;
+import facturar.Modelo.Parametro;
 import facturar.Modelo.Repositorio;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,19 +27,57 @@ public class ViewFactura extends javax.swing.JFrame {
     /**
      * Creates new form ViewFactura
      */
+    
+    int identificador = 0, identificadorCliente = 0, identificadorProducto = 0;
+    
     public HashMap <String,String> mapCli;
+    
     public ViewFactura() {
         initComponents();
        HashMap <String,String> map=new HashMap<String,String>();
+       
+       Parametro par = new Parametro();
+       Parametro parBorrar = new Parametro();
+       
         Repositorio<Cliente> regClientes =new Repositorio();
+        Repositorio<Parametro> regParametros =new Repositorio();
+        
         regClientes.cargar("Cliente");
-        List<Cliente> clientes =regClientes.getLista();
+        regParametros.cargar("Parametro");
+        
+        List<Cliente> clientes = regClientes.getLista();
+        List<Parametro> parametros = regParametros.getLista();
       
+        for (int i=0;i < parametros.size();i++){
+            
+            identificador = parametros.get(i).getId_fac()+1;
+            parBorrar.setId_fac(identificador - 1);
+            parBorrar.setId_Cli(parametros.get(i).getId_Cli());
+            parBorrar.setId_prod(parametros.get(i).getId_prod());
+            par.setId_fac(identificador);
+            par.setId_Cli(parametros.get(i).getId_Cli());
+            par.setId_prod(parametros.get(i).getId_prod());
+            //    System.out.println("test"+ identificador);
+
+        } 
+        
+        
+        txtId.setText(identificador+"");
+        txtId.setEnabled(false);
+        
+                
+        
+        
+        //System.out.println("test");
+        
         for (int i=0;i < clientes.size();i++){
            
            map.put(Integer.toString(clientes.get(i).getId()), clientes.get(i).getRazonSocial());
 
         }
+        
+         
+       
         mapCli=map;
        cboClientes.setModel(new DefaultComboBoxModel( map.values().toArray()));
 
@@ -62,8 +101,6 @@ public class ViewFactura extends javax.swing.JFrame {
         cboClientes = new javax.swing.JComboBox();
         btnContinuar = new javax.swing.JButton();
         btnAddProd = new javax.swing.JButton();
-        txtNum = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
         jDate = new com.toedter.calendar.JDateChooser();
@@ -92,7 +129,7 @@ public class ViewFactura extends javax.swing.JFrame {
 
         PanelSup.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 255)));
 
-        jLabel1.setText("Id. ");
+        jLabel1.setText("NumFact");
 
         jLabel2.setText("Cliente");
 
@@ -119,8 +156,6 @@ public class ViewFactura extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setText("NumFact");
-
         jLabel8.setText("Direccion");
 
         javax.swing.GroupLayout PanelSupLayout = new javax.swing.GroupLayout(PanelSup);
@@ -136,7 +171,7 @@ public class ViewFactura extends javax.swing.JFrame {
                 .addGroup(PanelSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelSupLayout.createSequentialGroup()
                         .addComponent(cboClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelSupLayout.createSequentialGroup()
                         .addGroup(PanelSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(PanelSupLayout.createSequentialGroup()
@@ -144,8 +179,7 @@ public class ViewFactura extends javax.swing.JFrame {
                                 .addComponent(btnContinuar))
                             .addGroup(PanelSupLayout.createSequentialGroup()
                                 .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, Short.MAX_VALUE)
-                                .addComponent(jLabel7)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(33, 33, 33)))
                 .addGroup(PanelSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelSupLayout.createSequentialGroup()
@@ -156,11 +190,10 @@ public class ViewFactura extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addComponent(btnAddProd))
                     .addGroup(PanelSupLayout.createSequentialGroup()
-                        .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(93, 93, 93)
+                        .addGap(142, 142, 142)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27))
         );
         PanelSupLayout.setVerticalGroup(
@@ -171,9 +204,7 @@ public class ViewFactura extends javax.swing.JFrame {
                     .addGroup(PanelSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3)
-                        .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7))
+                        .addComponent(jLabel3))
                     .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(PanelSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -422,7 +453,30 @@ public class ViewFactura extends javax.swing.JFrame {
         // funcionalidad para lanzar creación de Factura 
       FacturaControlador fcontrol = new FacturaControlador();  
       fcontrol.crear(this);  
-      this.btnContinuar.setEnabled(false);
+      this.btnContinuar.setEnabled(false);      
+      Parametro par = new Parametro();
+      Parametro parBorrar = new Parametro();
+      Repositorio<Parametro> regParametros =new Repositorio();        
+      regParametros.cargar("Parametro");
+      List<Parametro> parametros = regParametros.getLista();
+      
+        for (int i=0;i < parametros.size();i++){
+            
+            identificador = parametros.get(i).getId_fac()+1;
+            par.setId_fac(identificador);
+            par.setId_Cli(parametros.get(i).getId_Cli());
+            par.setId_prod(parametros.get(i).getId_prod());
+            //    System.out.println("test"+ identificador);
+
+        }
+        
+        regParametros.borrar(parBorrar);
+        
+        regParametros.adicionar(par);
+        
+        regParametros.guardar("Parametro");
+        
+      
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -434,6 +488,7 @@ public class ViewFactura extends javax.swing.JFrame {
         // TODO add your handling code here:
         DetFacturaControlador dfcontrol =new DetFacturaControlador();
         dfcontrol.crear(this);
+        this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
@@ -491,14 +546,12 @@ public class ViewFactura extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     public javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTextField txtDireccion;
     public javax.swing.JTextField txtId;
     private javax.swing.JTextField txtIva;
     public javax.swing.JTextField txtIva1;
-    public javax.swing.JTextField txtNum;
     public javax.swing.JTextField txtSubtotal;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,7 +4,7 @@ public class Factura {
   
     private int id;
     private String num;
-    private  int  idCliente;
+    private  String  idCliente;
     private String direccion;
     private Date fecha;
     
@@ -36,11 +36,11 @@ public class Factura {
         this.fecha = fecha;
     }
 
-    public int getIdCliente() {
+    public String getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(int idCliente) {
+    public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
     }
 

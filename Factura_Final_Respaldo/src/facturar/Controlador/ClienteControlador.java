@@ -2,11 +2,11 @@
 package facturar.Controlador;
 
 import facturar.Modelo.Cliente;
+import facturar.Modelo.Producto;
 import facturar.Modelo.Repositorio;
 import facturar.Modelo.Validar;
 import facturar.Vista.ViewCliente;
 import javax.swing.JOptionPane;
-
 
 public class ClienteControlador {
      Repositorio <Cliente> regCliente;
